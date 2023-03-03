@@ -156,7 +156,7 @@ const loadDetails = (id) => {
 const showDetails = datas => {
     console.log(datas)
     const modalBody = document.getElementById('modal-body');
-    const {image_link,image,description,accuracy,pricing,features} = datas;
+    const {image_link,image,description,accuracy,pricing,features,integrations} = datas;
     console.log(features.feature_name)
     modalBody.innerHTML = `
     <div>
@@ -193,18 +193,28 @@ const showDetails = datas => {
                 </div>
                 
             </div>
-            <div class="flex">
+            <div class="flex justify-between gap-4 py-5 px-5">
                 <div>
                     <h5
-                    class=" text-xl text-red-600 font-medium leading-tight  dark:text-neutral-50">
+                    class=" text-xl  font-medium leading-tight  dark:text-neutral-50">
                     Features
                     </h5>
                     <ul>
                         
                     </ul>
                 </div>
-                <div>
-
+                <div class="text-left">
+                    <h5
+                    class=" text-xl  font-medium leading-tight  dark:text-neutral-50">
+                     Integrations
+                    </h5>
+                    <ul class="text-left">
+                         <li>${integrations[0]?integrations[0]:""}</li>
+                         <li>${integrations[1]?integrations[1]:""}</li>
+                         <li>${integrations[2]?integrations[2]:''}</li>
+                         <li>${integrations[3]?integrations[3]:""}</li>
+                         <li>${integrations[4]?integrations[4]:""}</li>
+                    </ul>
                 </div>
             </div>
            
