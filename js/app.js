@@ -1,4 +1,5 @@
 const loadData = () => {
+    toggleLoader(true)
     const url = `https://openapi.programming-hero.com/api/ai/tools`;
     fetch(url)
         .then(res => res.json())
@@ -9,7 +10,7 @@ const loadData = () => {
 
 const displayAllData = (data) => {
 
-    // toggleLoader(true)
+    
     const cardContainer = document.getElementById('card-container');
     console.log(data)
     if (data.length > 6) {
@@ -34,14 +35,14 @@ const displayAllData = (data) => {
            <h2 class="card-title text-[#111111]">Features</h2>
 
            <ol class="list-decimal pl-4" id="features-item">
-           ${features.map(feature => (`<li class="text-[16px] font-semibold text-[#585858]">${feature}</li>`))}
+           ${showAllFeatures(features)}
            </ol>
 
            <hr>
             <div class="card-actions flex justify-between items-center h-20 ">
                 <div>
                 <h2 class="card-title text-[#111111]">${name}</h2>
-                <h3 class="text-[#585858]">${published_in}</h3>
+                <h3 class="text-[#585858]"><i class="fa-solid mr-2 fa-calendar-days"></i>${published_in}</h3>
                 </div>
                 <div class="">
                 
@@ -59,7 +60,7 @@ const displayAllData = (data) => {
 
 
     })
-    // toggleLoader(false)
+    toggleLoader(false)
 
 }
 
@@ -96,14 +97,15 @@ const displayAllData2 = (data) => {
            <h2 class="card-title text-[#111111]">Features</h2>
 
            <ol class="list-decimal pl-4" id="features-item">
-           ${features.map(feature => (`<li class="text-[16px] font-semibold text-[#585858]">${feature}</li>`))}
+           
+           ${showAllFeatures(features)}
            </ol>
 
            <hr>
             <div class="card-actions flex justify-between items-center h-20 ">
                 <div>
                 <h2 class="card-title text-[#111111]">${name}</h2>
-                <h3 class="text-[#585858]">${published_in}</h3>
+                <h3 class="text-[#585858]"><i class="fa-solid mr-2 fa-calendar-days"></i>${published_in}</h3>
                 </div>
                 <div class="">
                 
@@ -121,25 +123,26 @@ const displayAllData2 = (data) => {
 
 
     })
-    // toggleLoader(false)
+    toggleLoader(false)
 
 }
-// const toggleLoader=isLoading=>{
-//     const loader =document.getElementById('loader');
-//     if(isLoading){
-//         loader.classList.remove('hidden')
-//     }else{
-//         loader.classList.add('hidden')
-//     }
-// }
+const toggleLoader=isLoading=>{
+    const loader =document.getElementById('loader');
+    if(isLoading){
+        loader.classList.remove('hidden')
+    }else{
+        loader.classList.add('hidden')
+    }
+}
 
+const showAllFeatures=(features)=>{
+    let featureHtml ='';
+    for(const feature of features){
+        featureHtml +=`<li>${feature}</li>`
+    }
+    return featureHtml;
+}
 
-// const ol=document.getElementById('features-item');
-// data.features.forEach(feature=>{
-//     let li =document.createElement('li');
-//     li.innerText = feature;
-//     ol.appendChild(li)
-// })
 document.getElementById('btn-see-more').addEventListener('click', function () {
     loadData2()
     document.getElementById('see-more').classList.add('hidden')
@@ -152,12 +155,15 @@ const loadDetails = (id) => {
         .then(data => showDetails(data.data))
 }
 
+// modal data .........................
 
 const showDetails = datas => {
     console.log(datas)
     const modalBody = document.getElementById('modal-body');
-    const {image_link,image,description,accuracy,pricing,features,integrations} = datas;
-    console.log(features.feature_name)
+    const {image_link,image,description,accuracy,pricing,features,integrations,input_output_examples} = datas;
+    for(const feature in features){
+        console.log(feature.feature_name)
+    }
     modalBody.innerHTML = `
     <div>
     <div class="flex justify-center ">
@@ -209,11 +215,7 @@ const showDetails = datas => {
                      Integrations
                     </h5>
                     <ul class="text-left">
-                         <li>${integrations[0]?integrations[0]:""}</li>
-                         <li>${integrations[1]?integrations[1]:""}</li>
-                         <li>${integrations[2]?integrations[2]:''}</li>
-                         <li>${integrations[3]?integrations[3]:""}</li>
-                         <li>${integrations[4]?integrations[4]:""}</li>
+                         ${showAllFeatures(integrations)}
                     </ul>
                 </div>
             </div>
@@ -228,7 +230,7 @@ const showDetails = datas => {
             <a href="#!" data-te-ripple-init data-te-ripple-color="light">
             <div class="flex justify-center space-x-2">
         <button
-            type="button" id="accuracy"
+            type="button" 
             class="mb-2 ml-48 mt-2 bg-orange-500 flex absolute rounded bg-primary px-6 pt-2.5 pb-2 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)]">
              <span
             class="mr-2 inline-block whitespace-nowrap rounded-[0.27rem] bg-danger-100 px-[0.65em] pt-[0.35em] pb-[0.25em] text-center align-baseline text-[0.75em] font-bold leading-none text-danger-700"
@@ -244,11 +246,10 @@ const showDetails = datas => {
             <div class="p-6 text-center">
                 <h5
                     class="mb-2 text-xl font-medium leading-tight text-neutral-800 dark:text-neutral-50">
-                    Card title
+                    ${input_output_examples[0].input?input_output_examples[0].input : 'Can you give any example?'}
                 </h5>
                 <p class="mb-4 text-base text-neutral-600 dark:text-neutral-200">
-                    Some quick example text to build on the card title and make up the
-                    bulk of the card's content.
+                ${input_output_examples[0].output?input_output_examples[0].output : 'No! Not Yet! Take a break!!!'}
                 </p>
             </div>
         </div>
