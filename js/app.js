@@ -91,8 +91,7 @@ const displayAllData2 = (data) => {
         console.log(singleData)
         const { image, features, name, published_in, id } = singleData;
 
-        // features.forEach(feature=>console.log(feature))
-        // const ol = document.createElement('ol');
+       
         cardContainer.innerHTML += `  
         <div class="card card-compact w-full max-w-96 bg-base-100 shadow-xl">
         
