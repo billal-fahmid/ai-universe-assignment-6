@@ -200,13 +200,13 @@ const showDetails = datas => {
                 
             </div>
             <div class="flex justify-between gap-4 py-5 px-5">
-                <div>
+                <div class="text-left">
                     <h5
                     class=" text-xl  font-medium leading-tight  dark:text-neutral-50">
                     Features
                     </h5>
-                    <ul>
-                        
+                    <ul >
+                        ${showModalFeature(features)}
                     </ul>
                 </div>
                 <div class="text-left">
@@ -257,6 +257,14 @@ const showDetails = datas => {
 </div>
     
     `
+}
+const showModalFeature=(object)=>{
+    let objectHtml ='';
+    for(const key in object){
+        objectHtml +=`<li>${object[key].feature_name}</li>`
+    }
+    return objectHtml;
+
 }
 
 
