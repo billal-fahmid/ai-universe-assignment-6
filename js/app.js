@@ -149,13 +149,14 @@ const loadDetails = (id) => {
     const url = `https://openapi.programming-hero.com/api/ai/tool/${id}`;
     fetch(url)
         .then(res => res.json())
-        .then(data => showDetails(data))
+        .then(data => showDetails(data.data))
 }
 
 
 const showDetails = datas => {
     console.log(datas)
     const modalBody = document.getElementById('modal-body');
+    const {image_link,image,description} = datas;
     modalBody.innerHTML = `
     <div>
     <div class="flex justify-center ">
@@ -203,7 +204,7 @@ const showDetails = datas => {
         <div class="block max-w-sm rounded-lg bg-white shadow-lg dark:bg-neutral-700">
             <a href="#!" data-te-ripple-init data-te-ripple-color="light">
                 <img class="rounded-t-lg"
-                    src="https://tecdn.b-cdn.net/img/new/standard/nature/186.jpg" alt="" />
+                    src="${image_link[0] ? image_link[0] : image}" alt="" />
             </a>
             <div class="p-6 text-center">
                 <h5
