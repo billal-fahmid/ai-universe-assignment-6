@@ -1,17 +1,22 @@
+
+let arry =[];
 const loadData = () => {
     toggleLoader(true)
     const url = `https://openapi.programming-hero.com/api/ai/tools`;
     fetch(url)
         .then(res => res.json())
-        .then(data => displayAllData(data.data.tools))
+        .then(data => {
+            arry =data.data.tools
+            displayAllData(data.data.tools)})
+        
 }
 
 
-
+const cardContainer = document.getElementById('card-container');
 const displayAllData = (data) => {
 
+   
     
-    const cardContainer = document.getElementById('card-container');
     console.log(data)
     if (data.length > 6) {
         aiTools = data.slice(0, 6)
@@ -25,8 +30,7 @@ const displayAllData = (data) => {
         console.log(singleData)
         const { image, features, name, published_in, id } = singleData;
 
-        // features.forEach(feature=>console.log(feature))
-        // const ol = document.createElement('ol');
+      
         cardContainer.innerHTML += `  
         <div class="card card-compact w-96 bg-base-100 shadow-xl">
         <figure class="py-10 px-10"><img class="rounded-lg h-48" src="${image}" alt="Shoes" /></figure>
@@ -165,12 +169,12 @@ const showDetails = datas => {
         console.log(feature.feature_name)
     }
     modalBody.innerHTML = `
-    <div>
-    <div class="flex justify-center ">
+    <div class="">
+    <div class="flex justify-center h-[500px]">
         <div
             class="block max-w-sm rounded-lg bg-red-100 text-center shadow-lg dark:bg-neutral-700">
            
-            <div class="px-6 py-2">
+            <div class="px-6 py-2 ">
                 <h5
                     class="mb-2 text-xl font-medium leading-tight text-neutral-800 dark:text-neutral-50">
                     ${description}
@@ -182,19 +186,19 @@ const showDetails = datas => {
                 <div class="h-28 w-32 bg-slate-50 flex justify-center items-center rounded">
                     <h5
                     class=" text-xl font-medium leading-tight text-green-600 dark:text-neutral-50">
-                    ${pricing[0].price?pricing[0].price : 'Free of Cast'}
+                    ${pricing[0].price ? pricing[0].price : 'Free of Cast'}
                 </h5>
                 </div>
                 <div class="h-28 w-32 bg-slate-50 flex justify-center items-center rounded">
                     <h5
                     class=" text-xl font-medium leading-tight text-orange-500 dark:text-neutral-50">
-                    ${pricing[1].price?pricing[1].price : 'Free of Cast'}
+                    ${pricing[1].price ? pricing[1].price : 'Free of Cast'}
                 </h5>
                 </div>
                 <div class="h-28 w-32 bg-slate-50 flex justify-center items-center rounded">
                     <h5
                     class=" text-xl text-red-600 font-medium leading-tight  dark:text-neutral-50">
-                    ${pricing[2].price?pricing[2].price : 'Free of Cast'}
+                    ${pricing[2].price ? pricing[2].price : 'Free of Cast'}
                 </h5>
                 </div>
                 
@@ -215,7 +219,7 @@ const showDetails = datas => {
                      Integrations
                     </h5>
                     <ul class="text-left">
-                         ${showAllFeatures(integrations)}
+                         ${showAllFeatures(integrations)?showAllFeatures(integrations) : 'No data Found'}
                     </ul>
                 </div>
             </div>
@@ -224,14 +228,14 @@ const showDetails = datas => {
     </div>
 </div>
 <!-- modal right site -->
-<div>
-    <div class="flex justify-center">
+<div class="">
+    <div class="flex justify-center h-[500px]">
         <div class="block max-w-sm rounded-lg bg-white shadow-lg dark:bg-neutral-700">
             <a href="#!" data-te-ripple-init data-te-ripple-color="light">
             <div class="flex justify-center space-x-2">
-        <button
+        <button id="btn-accuracy"
             type="button" 
-            class="mb-2 ml-48 mt-2 bg-orange-500 flex absolute rounded bg-primary px-6 pt-2.5 pb-2 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)]">
+            class="mb-2 ml-44 mt-2 bg-orange-500 flex absolute rounded bg-primary px-6 pt-2.5 pb-2 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)]">
              <span
             class="mr-2 inline-block whitespace-nowrap rounded-[0.27rem] bg-danger-100 px-[0.65em] pt-[0.35em] pb-[0.25em] text-center align-baseline text-[0.75em] font-bold leading-none text-danger-700"
             >${accuracy.score? accuracy.score : ''}</span
@@ -243,7 +247,7 @@ const showDetails = datas => {
                 <img class="rounded-t-lg static"
                     src="${image_link[0] ? image_link[0] : image}" alt="" />
             </a>
-            <div class="p-6 text-center">
+            <div class="p-6  text-center">
                 <h5
                     class="mb-2 text-xl font-medium leading-tight text-neutral-800 dark:text-neutral-50">
                     ${input_output_examples[0].input?input_output_examples[0].input : 'Can you give any example?'}
@@ -256,7 +260,11 @@ const showDetails = datas => {
     </div>
 </div>
     
-    `
+    `;
+    const btnAccuracy = document.getElementById('btn-accuracy');
+    if(accuracy.score===null){
+        btnAccuracy.classList.add('hidden');
+    }
 }
 const showModalFeature=(object)=>{
     let objectHtml ='';
@@ -267,6 +275,15 @@ const showModalFeature=(object)=>{
 
 }
 
+document.getElementById('btn-sort').addEventListener('click' , function(){
+    const sortByDate = arry.sort(function(a,b){
+        return new Date(b.published_in) - new Date(a.published_in);
+    })
+    cardContainer.innerHTML =''
+    displayAllData(sortByDate)
+    cardContainer.innerHTML =''
+    displayAllData2(sortByDate)
+})
 
 
 
