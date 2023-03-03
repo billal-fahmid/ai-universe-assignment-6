@@ -5,9 +5,19 @@ const loadData = () => {
         .then(data => displayAllData(data.data.tools))
 }
 
-const displayAllData = (data) => {
+const displayAllData = (data ) => {
+    
+    // toggleLoader(true)
     const cardContainer = document.getElementById('card-container');
-    data.slice(0,6).forEach(singleData => {
+
+    if(data.length>6){
+        aiTools = data.slice(0,6)
+        document.getElementById('see-more').classList.remove('hidden')
+    }else{
+        document.getElementById('see-more').classList.add('hidden')
+    }
+    
+    aiTools.forEach(singleData => {
         console.log(singleData)
         const {image,features,name,published_in}=singleData;
         
@@ -20,7 +30,7 @@ const displayAllData = (data) => {
          
            <h2 class="card-title text-[#111111]">Features</h2>
 
-           <ol class="list-decimal pl-4">
+           <ol class="list-decimal pl-4" id="features-item">
            ${features.map(feature=>(`<li class="text-[16px] font-semibold text-[#585858]">${feature}</li>`))}
            </ol>
 
@@ -39,6 +49,32 @@ const displayAllData = (data) => {
             </div>
         </div>
     </div>`
+       
+        
     })
+    // toggleLoader(false)
+   
 }
 
+const toggleLoader=isLoading=>{
+    const loader =document.getElementById('loader');
+    if(isLoading){
+        loader.classList.remove('hidden')
+    }else{
+        loader.classList.add('hidden')
+    }
+}
+
+
+
+
+
+
+
+
+// const ol=document.getElementById('features-item');
+// data.features.forEach(feature=>{
+//     let li =document.createElement('li');
+//     li.innerText = feature;
+//     ol.appendChild(li)
+// })
