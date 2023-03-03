@@ -209,7 +209,7 @@ const showDetails = datas => {
                     class=" text-xl  font-medium leading-tight  dark:text-neutral-50">
                     Features
                     </h5>
-                    <ul >
+                    <ul class="pl-4 pt-2" style="list-style-type:circle">
                         ${showModalFeature(features)}
                     </ul>
                 </div>
@@ -218,7 +218,7 @@ const showDetails = datas => {
                     class=" text-xl  font-medium leading-tight  dark:text-neutral-50">
                      Integrations
                     </h5>
-                    <ul class="text-left">
+                    <ul class="text-left pl-4 pt-2" style="list-style-type:circle">
                          ${showAllFeatures(integrations)?showAllFeatures(integrations) : 'No data Found'}
                     </ul>
                 </div>
