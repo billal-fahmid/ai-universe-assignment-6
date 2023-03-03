@@ -4,12 +4,8 @@ const loadData = () => {
         .then(res => res.json())
         .then(data => displayAllData(data.data.tools))
 }
-const loadData2 = () => {
-    const url = `https://openapi.programming-hero.com/api/ai/tools`;
-    fetch(url)
-        .then(res => res.json())
-        .then(data => displayAllData2(data.data.tools))
-}
+
+
 
 const displayAllData = (data) => {
     
@@ -26,7 +22,7 @@ const displayAllData = (data) => {
     console.log(aiTools)
     aiTools.forEach(singleData => {
         console.log(singleData)
-        const {image,features,name,published_in}=singleData;
+        const {image,features,name,published_in,id}=singleData;
         
         // features.forEach(feature=>console.log(feature))
         // const ol = document.createElement('ol');
@@ -49,7 +45,9 @@ const displayAllData = (data) => {
                 </div>
                 <div class="">
                 
-                <button data-te-toggle="modal" data-te-target="#exampleModalScrollable" data-te-ripple-init
+                <button onclick="loadDetails('${id}')" data-te-toggle="modal"
+                data-te-target="#exampleModalLg"
+                data-te-ripple-init
                 data-te-ripple-color="light"  class="btn btn-circle border-none bg-orange-300 hover:bg-orange-200">
                
                 <i class="fa-solid fa-arrow-right"></i>
@@ -63,6 +61,14 @@ const displayAllData = (data) => {
     })
     // toggleLoader(false)
    
+}
+
+// data load for show button click 
+const loadData2 = () => {
+    const url = `https://openapi.programming-hero.com/api/ai/tools`;
+    fetch(url)
+        .then(res => res.json())
+        .then(data => displayAllData2(data.data.tools))
 }
 const displayAllData2 = (data) => {
     
@@ -78,7 +84,7 @@ const displayAllData2 = (data) => {
     console.log(aiTools)
     data.forEach(singleData => {
         console.log(singleData)
-        const {image,features,name,published_in}=singleData;
+        const {image,features,name,published_in,id}=singleData;
         
         // features.forEach(feature=>console.log(feature))
         // const ol = document.createElement('ol');
@@ -101,7 +107,11 @@ const displayAllData2 = (data) => {
                 </div>
                 <div class="">
                 
-                <button class="btn btn-circle border-none bg-orange-300 hover:bg-orange-200">
+                <button onclick="loadDetails('${id}')" data-te-toggle="modal"
+                data-te-target="#exampleModalLg"
+                data-te-ripple-init
+                data-te-ripple-color="light"  class="btn btn-circle border-none bg-orange-300 hover:bg-orange-200">
+               
                 <i class="fa-solid fa-arrow-right"></i>
                 </button>
                 </div>
@@ -114,7 +124,6 @@ const displayAllData2 = (data) => {
     // toggleLoader(false)
    
 }
-
 // const toggleLoader=isLoading=>{
 //     const loader =document.getElementById('loader');
 //     if(isLoading){
@@ -124,15 +133,6 @@ const displayAllData2 = (data) => {
 //     }
 // }
 
-document.getElementById('btn-see-more').addEventListener('click' , function(){
-    loadData2()
-    document.getElementById('see-more').classList.add('hidden')
-})
-
-
-
-
-
 
 // const ol=document.getElementById('features-item');
 // data.features.forEach(feature=>{
@@ -140,3 +140,24 @@ document.getElementById('btn-see-more').addEventListener('click' , function(){
 //     li.innerText = feature;
 //     ol.appendChild(li)
 // })
+document.getElementById('btn-see-more').addEventListener('click' , function(){
+    loadData2()
+    document.getElementById('see-more').classList.add('hidden')
+})
+
+const loadDetails=(id)=>{
+    const url=`https://openapi.programming-hero.com/api/ai/tool/${id}`;
+    fetch(url)
+        .then(res =>res.json())
+        .then(data=> showDetails(data))
+}
+
+
+const showDetails=datas=>{
+    console.log(datas)
+}
+
+
+
+
+
