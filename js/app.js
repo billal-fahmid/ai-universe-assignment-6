@@ -32,8 +32,8 @@ const displayAllData = (data) => {
 
       
         cardContainer.innerHTML += `  
-        <div class="card card-compact w-96 bg-base-100 shadow-xl">
-        <figure class="py-10 px-10"><img class="rounded-lg h-48" src="${image}" alt="Shoes" /></figure>
+        <div class="card card-compact w-full max-w-96 bg-base-100 shadow-xl">
+        <figure class="md:py-10 md:px-10"> <img class="rounded-lg md:h-48" src="${image}" alt="Shoes" /></figure>
         <div class="card-body">
          
            <h2 class="card-title text-[#111111]">Features</h2>
@@ -94,8 +94,9 @@ const displayAllData2 = (data) => {
         // features.forEach(feature=>console.log(feature))
         // const ol = document.createElement('ol');
         cardContainer.innerHTML += `  
-        <div class="card card-compact w-96 bg-base-100 shadow-xl">
-        <figure class="py-10 px-10"><img class="rounded-lg h-48" src="${image}" alt="Shoes" /></figure>
+        <div class="card card-compact w-full max-w-96 bg-base-100 shadow-xl">
+        
+        <figure class="md:py-10 md:px-10"><img class="rounded-lg h-full md:h-48" src="${image}" alt="Shoes" /></figure>
         <div class="card-body">
          
            <h2 class="card-title text-[#111111]">Features</h2>
