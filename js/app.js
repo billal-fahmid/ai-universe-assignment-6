@@ -164,6 +164,7 @@ const loadDetails = (id) => {
 const showDetails = datas => {
     console.log(datas)
     const modalBody = document.getElementById('modal-body');
+    modalBody.innerHTML ='';
     const {image_link,image,description,accuracy,pricing,features,integrations,input_output_examples} = datas;
     for(const feature in features){
         console.log(feature.feature_name)
@@ -186,19 +187,19 @@ const showDetails = datas => {
                 <div class="h-28 w-32 bg-slate-50 flex justify-center items-center rounded">
                     <h5
                     class=" text-xl font-medium leading-tight text-green-600 dark:text-neutral-50">
-                    ${pricing[0].price ? pricing[0].price : 'Free of Cast'}
+                    ${pricing=== null|| pricing===undefined|| pricing[0].price==='0'? 'Free of Cast': pricing[0].price ? pricing[0].price:'Free of cast' }
                 </h5>
                 </div>
                 <div class="h-28 w-32 bg-slate-50 flex justify-center items-center rounded">
                     <h5
                     class=" text-xl font-medium leading-tight text-orange-500 dark:text-neutral-50">
-                    ${pricing[1].price ? pricing[1].price : 'Free of Cast'}
+                    ${pricing=== null|| pricing===undefined|| pricing[1].price==='0'? 'Free of Cast': pricing[1].price ? pricing[1].price:'Free of cast' }
                 </h5>
                 </div>
                 <div class="h-28 w-32 bg-slate-50 flex justify-center items-center rounded">
                     <h5
                     class=" text-xl text-red-600 font-medium leading-tight  dark:text-neutral-50">
-                    ${pricing[2].price ? pricing[2].price : 'Free of Cast'}
+                    ${pricing=== null|| pricing===undefined|| pricing[2].price==='0'? 'Free of Cast': pricing[2].price ? pricing[2].price:'Free of cast' }
                 </h5>
                 </div>
                 
@@ -210,7 +211,7 @@ const showDetails = datas => {
                     Features
                     </h5>
                     <ul class="pl-4 pt-2" style="list-style-type:circle">
-                        ${showModalFeature(features)}
+                        ${features===null|| features===undefined?'No data found': showModalFeature(features)}
                     </ul>
                 </div>
                 <div class="text-left">
@@ -219,7 +220,7 @@ const showDetails = datas => {
                      Integrations
                     </h5>
                     <ul class="text-left pl-4 pt-2" style="list-style-type:circle">
-                         ${showAllFeatures(integrations)?showAllFeatures(integrations) : 'No data Found'}
+                         ${integrations===null ||integrations=== undefined ?'No Data Found': showAllFeatures(integrations)?showAllFeatures(integrations) :'no data found'}
                     </ul>
                 </div>
             </div>
@@ -245,15 +246,15 @@ const showDetails = datas => {
         </button>
         </div>
                 <img class="rounded-t-lg static"
-                    src="${image_link[0] ? image_link[0] : image}" alt="" />
+                    src="${image_link===null || image_link===undefined? 'No data found': image_link[0] ? image_link[0] : "No Data Found"}" alt="" />
             </a>
             <div class="p-6  text-center">
                 <h5
                     class="mb-2 text-xl font-medium leading-tight text-neutral-800 dark:text-neutral-50">
-                    ${input_output_examples[0].input?input_output_examples[0].input : 'Can you give any example?'}
+                    ${input_output_examples===null?'No Data Found': input_output_examples[0].input?input_output_examples[0].input : 'Can you give any example?'}
                 </h5>
                 <p class="mb-4 text-base text-neutral-600 dark:text-neutral-200">
-                ${input_output_examples[0].output?input_output_examples[0].output : 'No! Not Yet! Take a break!!!'}
+                ${input_output_examples===null?'No Data Found':input_output_examples[0].output?input_output_examples[0].output : 'No! Not Yet! Take a break!!!'}
                 </p>
             </div>
         </div>
