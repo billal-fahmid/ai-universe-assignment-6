@@ -254,7 +254,7 @@ const showDetails = datas => {
                     ${input_output_examples===null?'No Data Found': input_output_examples[0].input?input_output_examples[0].input : 'Can you give any example?'}
                 </h5>
                 <p class="mb-4 text-base text-neutral-600 dark:text-neutral-200">
-                ${input_output_examples===null?'No Data Found':input_output_examples[0].output?input_output_examples[0].output : 'No! Not Yet! Take a break!!!'}
+                ${input_output_examples===null?'No! Not Yet! Take a break!!!':input_output_examples[0].output?input_output_examples[0].output : 'No! Not Yet! Take a break!!!'}
                 </p>
             </div>
         </div>
